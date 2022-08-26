@@ -8,7 +8,7 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 const Menu = () => {
   return (
     <SafeAreaView>
-      <View style={[commonStyle.screenContainer, styles.navbar]}>
+      <View style={[commonStyle.screenPadding, styles.navbar]}>
         <TouchableOpacity>
           <View style={styles.avatar}>
             <AntDesign name="user" size={16} color={colors.darkSecondary} />
