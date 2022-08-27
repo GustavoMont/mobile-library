@@ -33,8 +33,8 @@ export default Book;
 
 const styles = StyleSheet.create({
   cover: {
-    width: 181,
-    height: 232,
+    width: 222,
+    height: 282,
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
