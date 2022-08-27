@@ -1,15 +1,23 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import generateRandomColor from "../../functions/generatRandomColor";
 import colors from "../../styles/colors";
 import Overline from "../Typography/Overline";
 import H4 from "../Typography/H4";
+import generateColorSequence, {
+  removeColors,
+} from "../../functions/generatRandomColor";
 
-const Book = ({ book, ...props }) => {
+const Book = ({ book, index, ...props }) => {
   return (
     <View
       style={[
-        { backgroundColor: colors[generateRandomColor(colors)] },
+        {
+          backgroundColor: generateColorSequence(
+            colors,
+            removeColors(colors, "white"),
+            index
+          ),
+        },
         styles.cover,
       ]}
     >

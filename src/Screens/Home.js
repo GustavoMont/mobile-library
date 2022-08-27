@@ -5,6 +5,7 @@ import commonStyle from "../styles/common";
 import H4 from "../Components/Typography/H4";
 import requester from "../config/axios";
 import Book from "../Components/common/Book";
+import colors from "../styles/colors";
 
 const Home = () => {
   const [books, setBooks] = useState([
@@ -28,14 +29,17 @@ const Home = () => {
     <SafeAreaView
       style={[commonStyle.screenContainer, commonStyle.screenPadding]}
     >
-      <H4 color={"primary"}>Livros Disponíveis</H4>
+      <H4 color={colors.primary}>Livros Disponíveis</H4>
       <View>
         <FlatList
           style={styles.bookListContainer}
           data={books}
-          renderItem={({ item: book }) => <Book book={book} />}
+          renderItem={({ item: book, index }) => (
+            <Book book={book} index={index} />
+          )}
           ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
           horizontal
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>

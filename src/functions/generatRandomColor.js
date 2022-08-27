@@ -1,11 +1,12 @@
-export default function generateRandomColor(colorsObject) {
-  const colors = Object.keys(colorsObject);
-  const randomIndex = Math.floor(
-    Math.random() * (colors.length - 1 - 0 + 1) + 0
+export function removeColors(colors, toRemove) {
+  return Object.keys(colors).filter(
+    (color) => !color.toLowerCase().includes(toRemove)
   );
+}
 
-  if (colors[randomIndex].toLocaleLowerCase().includes("white")) {
-    return "primary";
-  }
-  return colors[randomIndex];
+export default function generateColorSequence(colors, colorsKeys, index) {
+  const colorIndex = index % colorsKeys.length;
+  const colorKey = colorsKeys[colorIndex];
+  console.log(colors[colorKey]);
+  return colors[colorKey];
 }
