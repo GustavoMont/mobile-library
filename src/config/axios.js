@@ -1,15 +1,14 @@
 import axios from "axios";
+import { camelizeKeys } from "humps";
 
-import { camelizeKeys, decamelizeKeys } from "humps";
 const requester = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: "http://192.168.0.104:8000/",
   headers: {
-    "Content-type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
-// Axios middleware to convert all api responses to camelCase
+
 requester.interceptors.response.use((response) => {
-  console.log("response");
   if (
     response.data &&
     response.headers["content-type"] === "application/json"
@@ -17,6 +16,19 @@ requester.interceptors.response.use((response) => {
     response.data = camelizeKeys(response.data);
   }
   return response;
+});
+
+requester.interceptors.request.use((config) => {
+  const newConfig = { ...config };
+  if (newConfig.headers["Content-Type"] === "multipart/form-data")
+    return newConfig;
+  if (config.params) {
+    newConfig.params = decamelizeKeys(config.params);
+  }
+  if (config.data) {
+    newConfig.data = decamelizeKeys(config.data);
+  }
+  return newConfig;
 });
 
 export default requester;
