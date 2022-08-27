@@ -7,6 +7,5 @@ export function removeColors(colors, toRemove) {
 export default function generateColorSequence(colors, colorsKeys, index) {
   const colorIndex = index % colorsKeys.length;
   const colorKey = colorsKeys[colorIndex];
-  console.log(colors[colorKey]);
   return colors[colorKey];
 }
