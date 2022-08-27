@@ -14,17 +14,15 @@ import Book from "../Components/common/Book";
 import colors from "../styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import useMenu from "../data/Hooks/useMenu";
+import SkeletonBox from "../Components/common/skeletons/Box";
 
 const Home = () => {
   const { handleActiveScreen } = useMenu();
-
-  const [books, setBooks] = useState([
-    {
-      title: "",
-      author: "",
-      id: NaN,
-    },
-  ]);
+  const [books, setBooks] = useState([]);
+  const placeHolderList = Array.from({ length: 8 }, () => {
+    id: Math.floor(Math.random() * 40);
+  });
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     handleActiveScreen("home");
@@ -35,6 +33,7 @@ const Home = () => {
       try {
         const { data: books } = await requester.get("books/");
         setBooks(books);
+        setisLoading(false);
       } catch (error) {
         console.log(error.message);
       }
@@ -52,13 +51,20 @@ const Home = () => {
         </View>
       </TouchableOpacity>
       <H4 color={colors.primary}>Livros Disponíveis</H4>
+
       <View>
         <FlatList
           style={styles.bookListContainer}
-          data={books}
-          renderItem={({ item: book, index }) => (
-            <Book book={book} index={index} />
-          )}
+          data={isLoading ? placeHolderList : books}
+          renderItem={({ item: book, index }) =>
+            isLoading ? (
+              <SkeletonBox
+                outStyle={{ width: 222, height: 282, borderRadius: 4 }}
+              />
+            ) : (
+              <Book book={book} index={index} />
+            )
+          }
           ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
           horizontal
           showsHorizontalScrollIndicator={false}
