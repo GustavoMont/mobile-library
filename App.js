@@ -14,6 +14,7 @@ import {
   useFonts as useRubikFonts,
 } from "@expo-google-fonts/rubik";
 import * as Rubik from "@expo-google-fonts/rubik";
+import MenuProvider from "./src/data/Providers/MenuProvider";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,12 +31,14 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <Menu />
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="home" component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MenuProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="home" component={Home} />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <Menu />
+      </MenuProvider>
     </React.Fragment>
   );
 }

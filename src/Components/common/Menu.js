@@ -1,22 +1,58 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import commonStyle from "../../styles/common";
 import colors from "../../styles/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AntDesign, Feather } from "@expo/vector-icons";
-
+import { FontAwesome } from "@expo/vector-icons";
+import MenuButton from "./MenuButton";
 const Menu = () => {
   return (
     <SafeAreaView>
       <View style={[commonStyle.screenPadding, styles.navbar]}>
-        <TouchableOpacity>
-          <View style={styles.avatar}>
-            <AntDesign name="user" size={16} color={colors.darkSecondary} />
-          </View>
+        <MenuButton
+          rules={{ neeAuth: false }}
+          renderIcon={(style) => (
+            <FontAwesome size={24} name="home" style={style} />
+          )}
+          buttonId={"home"}
+        />
+        <MenuButton
+          rules={{ needAuth: true, isAuth: true }}
+          buttonId="loans"
+          renderIcon={(style) => (
+            <FontAwesome name="bookmark" size={24} style={style} />
+          )}
+        />
+        <MenuButton
+          rules={{ needAuth: true, isAuth: true }}
+          buttonId="list"
+          renderIcon={(style) => (
+            <FontAwesome name="list" size={24} style={style} />
+          )}
+        />
+
+        {/* <TouchableOpacity
+          style={[styles.menuButtons, handleActiveButton("loans")]}
+        >
+          <FontAwesome
+            name="bookmark"
+            size={24}
+            style={[
+              handleIconStatus({ needAuth: true, isAuth: false }, "loans"),
+            ]}
+          />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather name="menu" size={24} color={colors.white} />
-        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.menuButtons, handleActiveButton("list")]}
+        >
+          <FontAwesome
+            name="bookmark"
+            size={24}
+            style={[
+              handleIconStatus({ needAuth: true, isAuth: false }, "list"),
+            ]}
+          />
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
@@ -29,15 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.darkPrimary,
     paddingVertical: 16,
-  },
-  avatar: {
-    backgroundColor: colors.white,
-    width: 32,
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 9999,
   },
 });
