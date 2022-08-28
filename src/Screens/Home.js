@@ -1,9 +1,10 @@
 import {
   FlatList,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
+  ScrollView,
+  Text,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,6 +16,8 @@ import colors from "../styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import useMenu from "../data/Hooks/useMenu";
 import SkeletonBox from "../Components/common/skeletons/Box";
+import Button from "../Components/common/Button";
+import ButtonText from "../Components/Typography/ButtonText";
 
 const Home = () => {
   const { handleActiveScreen } = useMenu();
@@ -51,8 +54,7 @@ const Home = () => {
         </View>
       </TouchableOpacity>
       <H4 color={colors.primary}>Livros Disponíveis</H4>
-
-      <View>
+      <ScrollView>
         <FlatList
           style={styles.bookListContainer}
           data={isLoading ? placeHolderList : books}
@@ -69,7 +71,18 @@ const Home = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </View>
+        <View style={{ marginTop: 32 }}>
+          <H4 color={colors.primary}>Aproveite nosso app!</H4>
+          <View style={{ marginTop: 32 }}>
+            <Button>
+              <ButtonText color={colors.white}>Faça login</ButtonText>
+            </Button>
+            <Button color={"secondary"} style={{ marginTop: 16 }}>
+              <ButtonText color={colors.white}>Cadastre-se</ButtonText>
+            </Button>
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

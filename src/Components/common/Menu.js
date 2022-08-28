@@ -17,42 +17,19 @@ const Menu = () => {
           buttonId={"home"}
         />
         <MenuButton
-          rules={{ needAuth: true, isAuth: true }}
+          rules={{ needAuth: true, isAuth: false }}
           buttonId="loans"
           renderIcon={(style) => (
             <FontAwesome name="bookmark" size={24} style={style} />
           )}
         />
         <MenuButton
-          rules={{ needAuth: true, isAuth: true }}
+          rules={{ needAuth: true, isAuth: false }}
           buttonId="list"
           renderIcon={(style) => (
             <FontAwesome name="list" size={24} style={style} />
           )}
         />
-
-        {/* <TouchableOpacity
-          style={[styles.menuButtons, handleActiveButton("loans")]}
-        >
-          <FontAwesome
-            name="bookmark"
-            size={24}
-            style={[
-              handleIconStatus({ needAuth: true, isAuth: false }, "loans"),
-            ]}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.menuButtons, handleActiveButton("list")]}
-        >
-          <FontAwesome
-            name="bookmark"
-            size={24}
-            style={[
-              handleIconStatus({ needAuth: true, isAuth: false }, "list"),
-            ]}
-          />
-        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
