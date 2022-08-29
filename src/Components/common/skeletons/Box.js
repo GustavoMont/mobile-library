@@ -17,7 +17,7 @@ const AnimatedLine = Animated.createAnimatedComponent(LinearGradient);
 const Box = ({ outStyle }) => {
   const xPosition = useSharedValue(0);
   useEffect(() => {
-    xPosition.value = withRepeat(withTiming(2, { duration: 3000 }), -1);
+    xPosition.value = withRepeat(withTiming(1, { duration: 3000 }), -1);
   }, []);
   const animationStyle = useAnimatedStyle(() => ({
     transform: [
