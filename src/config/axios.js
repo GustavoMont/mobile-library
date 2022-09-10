@@ -1,8 +1,10 @@
 import axios from "axios";
 import { camelizeKeys } from "humps";
 
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 const requester = axios.create({
-  baseURL: "http://192.168.0.104:8000/",
+  baseURL: ENDPOINT || "http://192.168.0.104:8000/",
   headers: {
     "Access-Control-Allow-Origin": "*",
   },

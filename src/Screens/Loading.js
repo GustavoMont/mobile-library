@@ -3,15 +3,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect } from "react";
 import colors from "../styles/colors";
 import LogoImage from "../../assets/images/Logo.png";
-import {
-  ABeeZee_400Regular,
-  useFonts as useAbeezeFonst,
-} from "@expo-google-fonts/abeezee";
-import {
-  Rubik_400Regular,
-  useFonts as useRubikFonts,
-} from "@expo-google-fonts/rubik";
-import * as Rubik from "@expo-google-fonts/rubik";
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -27,14 +18,6 @@ const AnimatedLogo = Animated.createAnimatedComponent(Image);
 
 const Loading = () => {
   const logoScale = useSharedValue(0.9);
-  const navigate = useNavigation();
-
-  const [rubikLoaded, rubikError] = useRubikFonts({
-    Rubik_400Regular,
-  });
-  const [abeezeeLoaded, abeezeError] = useAbeezeFonst({
-    ABeeZee_400Regular,
-  });
 
   const logoAnimationStyle = useAnimatedStyle(() => ({
     transform: [
@@ -46,10 +29,7 @@ const Loading = () => {
   }));
 
   useEffect(() => {
-    logoScale.value = withTiming(1.2, { duration: 2800 }, () => {
-      "worklet";
-      navigate.navigate("home");
-    });
+    logoScale.value = withTiming(1.2, { duration: 2800 });
   }, []);
 
   return (
@@ -64,8 +44,6 @@ const Loading = () => {
     </SafeAreaView>
   );
 };
-
-RTCPeerConnection;
 
 export default Loading;
 

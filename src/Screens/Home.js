@@ -19,7 +19,7 @@ import SkeletonBox from "../Components/common/skeletons/Box";
 import Button from "../Components/common/Button";
 import ButtonText from "../Components/Typography/ButtonText";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const { handleActiveScreen } = useMenu();
   const [books, setBooks] = useState([]);
   const placeHolderList = Array.from({ length: 8 }, () => {
@@ -30,6 +30,10 @@ const Home = () => {
   useEffect(() => {
     handleActiveScreen("home");
   }, []);
+
+  function navigate(to = "", options = {}) {
+    navigation.navigate(to, options);
+  }
 
   useEffect(() => {
     async function getBooks() {
@@ -64,7 +68,16 @@ const Home = () => {
                 outStyle={{ width: 222, height: 282, borderRadius: 4 }}
               />
             ) : (
-              <Book book={book} index={index} />
+              <Book
+                book={book}
+                index={index}
+                onPress={() =>
+                  navigate("book", {
+                    id: book.id,
+                    otherParam: "anything you want here",
+                  })
+                }
+              />
             )
           }
           ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
@@ -74,10 +87,14 @@ const Home = () => {
         <View style={{ marginTop: 32 }}>
           <H4 color={colors.primary}>Aproveite nosso app!</H4>
           <View style={{ marginTop: 32 }}>
-            <Button>
+            <Button onPress={() => navigate("login")}>
               <ButtonText color={colors.white}>Faça login</ButtonText>
             </Button>
-            <Button color={"secondary"} style={{ marginTop: 16 }}>
+            <Button
+              color={"secondary"}
+              style={{ marginTop: 16 }}
+              onPress={() => navigate("signup")}
+            >
               <ButtonText color={colors.white}>Cadastre-se</ButtonText>
             </Button>
           </View>
